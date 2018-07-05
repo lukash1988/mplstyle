@@ -1,3 +1,4 @@
+# coding=utf-8
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 from cycler import cycler
@@ -9,6 +10,7 @@ class PLTdiss(PLTbase):
 
     _EWK_GGPLT = 'ewk_ggplt'
     _EWK = 'ewk'
+    _ENERGY = 'energy'
     _SINGLE = 'single'
     _DOUBLE = 'double'
 
@@ -16,7 +18,7 @@ class PLTdiss(PLTbase):
         PLTbase.__init__(self)
 
         available_styles = {
-            'color_style': [self._EWK_GGPLT, self._EWK],
+            'color_style': [self._EWK_GGPLT, self._EWK,self._ENERGY],
             'color_order_style': [self._EWK_GGPLT, self._EWK],
             'plt_style': [self._EWK_GGPLT, self._EWK,self._DOUBLE,self._SINGLE]}
 
@@ -54,14 +56,31 @@ class PLTdiss(PLTbase):
                 'c8': '#bcbd22',
                 'c9': '#17becf'
             }
+        elif style == self._ENERGY:
+            return {
+                u'Nutzenergie': (102,204,0),
+                u'Endenergie': (255,153,51),
+                u'Primärenergie': (102,102,0),
+                u'Verluste1': (204,102,0),
+                u'Verluste2': (204,0,0),
+                u'Gewinne': (0,204,102),
+                u'Hersteller': (100,149,237),
+                'c3': '#d62728',
+                'c4': '#9467bd',
+                'c5': '#8c564b',
+                'c6': '#e377c2',
+                'c7': '#7f7f7f',
+                'c8': '#bcbd22',
+                'c9': '#17becf'
+            }
         return None
 
     def _get_colors_order(self, style):
 
         if style == self._EWK_GGPLT:
-            return ['mdarkred', 'mediumred', 'lightred', 'darkgreen',
-                    'mediumgreen', 'mlightgreen', 'lightgreen', 'darkblue',
-                    'mediumblue', 'lightblue', 'darkred', 'black', 'darkgrey',
+            return ['mediumblue', 'mediumgreen', 'lightred', 'darkgreen',
+                    'lightgreen','mediumblue',
+                    'mdarkred', 'lightblue', 'darkred', 'black', 'darkgrey',
                     'mediumgrey', 'mlightgrey']
         elif style == self._EWK:
             return ['c0', 'c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9']
@@ -129,7 +148,7 @@ class PLTdiss(PLTbase):
             mpl.rc('font', **font)
             mpl.rc('figure', figsize=[6, 3], titlesize=fntsz)
             mpl.rc('legend', framealpha=None,
-                   edgecolor='gainsboro',
+                   edgecolor='grey',
                    fontsize=fntsz - 2, numpoints=1, handlelength=1,
                    loc='best', frameon=True, shadow=False,
                    fancybox=False)
@@ -141,7 +160,7 @@ class PLTdiss(PLTbase):
             mpl.rcParams['axes.spines.top'] = False
             mpl.rc('grid', linestyle=':', color='darkgrey',
                    linewidth=0.5)
-            mpl.rc('lines', lw=lw, markersize=10)
+            mpl.rc('lines', lw=lw, markersize=5)
             mpl.rc('xtick', color=fntcol, labelsize=fntsz - 2)
             mpl.rc('ytick', color=fntcol, labelsize=fntsz - 2)
             # add default colors to first postion (default color order)
