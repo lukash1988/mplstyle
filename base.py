@@ -126,6 +126,19 @@ class PLTbase:
         """
         return self._colors
 
+    def cat2col(self,cat):
+        ''' Get the color for a specified category
+        :param cat: Category for color
+        :return: Color
+        '''
+
+        color = self._colors.get(cat)
+
+        if color is None:
+            raise NotImplementedError('Color of category "{}" in colorstyle "{}" not defined'.format(cat, self._color_style))
+        else:
+            return color
+
     def get_color_order(self):
         """ Get ordered color list form chosen style.
 
