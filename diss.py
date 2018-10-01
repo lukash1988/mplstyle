@@ -17,12 +17,13 @@ class PLTdiss(PLTbase):
     _RECT = 'rect'
     _CONSOLIDATION = 'consolidation'
     _DISTANCES = 'distances'
+    _DELIVERY = 'delivery'
 
     def __init__(self):
         PLTbase.__init__(self)
 
         available_styles = {
-            'color_style': [self._EWK_GGPLT, self._EWK,self._ENERGY, self._STATS, self._CONSOLIDATION,self._DISTANCES],
+            'color_style': [self._EWK_GGPLT, self._EWK,self._ENERGY, self._STATS, self._CONSOLIDATION,self._DISTANCES, self._DELIVERY],
             'color_order_style': [self._EWK_GGPLT, self._EWK],
             'plt_style': [self._EWK_GGPLT, self._EWK,self._DOUBLE,self._SINGLE,self._RECT]}
 
@@ -128,6 +129,15 @@ class PLTdiss(PLTbase):
                 u'delivery':(255,192,0),
                 u'return': (247,150,70),
                 u'complete': (86,166,232)
+            }
+        elif style == self._DELIVERY:
+            return {
+                u'150': (51,153,255),
+                u'200':(255,153,51),
+                u'250': (51,153,51),
+                u'Stopps': (244,54,5),
+                u'Gebäude': (82,171,82),
+                u'Sendungen': (1,21,62)
             }
         return None
 
