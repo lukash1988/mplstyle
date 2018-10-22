@@ -18,6 +18,7 @@ class PLTdiss(PLTbase):
     _CONSOLIDATION = 'consolidation'
     _DISTANCES = 'distances'
     _DELIVERY = 'delivery'
+    _COMPARISONS = 'comp'
 
     def __init__(self):
         PLTbase.__init__(self)
@@ -25,7 +26,7 @@ class PLTdiss(PLTbase):
         available_styles = {
             'color_style': [self._EWK_GGPLT, self._EWK,self._ENERGY, self._STATS, self._CONSOLIDATION,self._DISTANCES, self._DELIVERY],
             'color_order_style': [self._EWK_GGPLT, self._EWK],
-            'plt_style': [self._EWK_GGPLT, self._EWK,self._DOUBLE,self._SINGLE,self._RECT]}
+            'plt_style': [self._EWK_GGPLT, self._EWK,self._DOUBLE,self._SINGLE,self._RECT,self._COMPARISONS]}
 
         self._add_available_styles(available_styles)
 
@@ -73,16 +74,16 @@ class PLTdiss(PLTbase):
                 u'Gewinne1': (242, 194, 21),
                 u'Gewinne2': (242, 146, 21),
                 u'Hersteller': (100,149,237),
-                u'FEV150C':(51,51,255),
-                u'FEV150P':(153,51,255),
-                u'ICEFV150':(102,0,0),
-                u'FEV200C':(51,51,255),
-                u'FEV200P':(153,51,255),
-                u'ICEFV200':(102,0,0),
-                u'FEV250C':(51,51,255),
-                u'ICEFV250':(102,0,0),
-                u'Diesel':(102,0,0),
-                u'Elektro':(153,51,255),
+                u'FEV150C':(249,241,0),
+                u'FEV150P':(98,218,234),
+                u'ICEFV150':(153,117,85),
+                u'FEV200C':(204,249,0),
+                u'FEV200P':(239,143,59),
+                u'ICEFV200':(155,107,10),
+                u'FEV250C':(244,227,68),
+                u'ICEFV250':(211,165,0),
+                u'Diesel':(186,165,147),
+                u'Elektro':(133,219,13),
                 u'Purpose Design':(153,51,255),
                 u'Conversion Design':(51,51,255),
                 u'Kernkraft': (255,0,0),
@@ -132,9 +133,9 @@ class PLTdiss(PLTbase):
             }
         elif style == self._DELIVERY:
             return {
-                u'150': (51,153,255),
-                u'200':(255,153,51),
-                u'250': (51,153,51),
+                u'150': (110,126,229),
+                u'200':(100,239,135),
+                u'250': (216,47,101),
                 u'Stopps': (244,54,5),
                 u'Gebäude': (82,171,82),
                 u'Sendungen': (1,21,62)
@@ -291,4 +292,35 @@ class PLTdiss(PLTbase):
             mpl.rcParams['axes.prop_cycle'] = cycler('color',
                                                      prop_cycle_colors)
             return True
+
+        elif style == self._COMPARISONS:
+            plt.style.use('default')
+            fntsz = 10
+            lw = 2
+            fntcol = 'black'
+            font = {'family': 'arial', 'weight': 'normal', 'size': fntsz}
+            mpl.rc('font', **font)
+            mpl.rc('figure', figsize=[6, 5], titlesize=fntsz)
+            mpl.rc('legend', framealpha=None,
+                   edgecolor='gainsboro',
+                   fontsize=fntsz - 2, numpoints=1, handlelength=1,
+                   loc='best', frameon=True, shadow=False,
+                   fancybox=False)
+            mpl.rcParams['text.color'] = fntcol
+            mpl.rc('axes', edgecolor=fntcol, grid=True,
+                   xmargin=0, labelsize=fntsz - 1, titlesize=fntsz,
+                   linewidth=0.9)
+            mpl.rcParams['axes.spines.right'] = False
+            mpl.rcParams['axes.spines.top'] = False
+            mpl.rc('grid', linestyle=':', color='darkgrey',
+                   linewidth=0.5)
+            mpl.rc('lines', lw=lw, markersize=10)
+            mpl.rc('xtick', color=fntcol, labelsize=fntsz - 2)
+            mpl.rc('ytick', color=fntcol, labelsize=fntsz - 2)
+            # add default colors to first postion (default color order)
+            mpl.rcParams['axes.prop_cycle'] = cycler('color',
+                                                     prop_cycle_colors)
+            return True
+
+
         return False
